@@ -10,7 +10,7 @@ using System.Web.Mvc;
 
 namespace Hospital.Controllers
 {
-    [Authorize(Roles = "Admin, Doctors, Patients")]
+    [Authorize(Roles ="Patients, Admin, Doctors")]
     public class PatientsController : Controller
     {
         // GET: Patient
@@ -79,6 +79,7 @@ namespace Hospital.Controllers
         }
 
         // GET: Patients/Create
+        [Authorize(Roles = "Doctors, Admin")]
         public ActionResult Create()
         {
             return View();
@@ -87,6 +88,7 @@ namespace Hospital.Controllers
         // POST: Patients/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
+        [Authorize(Roles = "Doctors, Admin")]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "Id,Name,DayOfBirth,Status,TaxCode")] Patient patient)

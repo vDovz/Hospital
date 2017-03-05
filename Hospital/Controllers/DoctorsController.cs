@@ -7,11 +7,10 @@ using System.Web.Mvc;
 using Hospital.Models;
 using System.IO;
 using System.Web;
-using System.Data.Entity.Validation;
 
 namespace Hospital.Controllers
 {
-    [Authorize(Roles = "Admin, Doctors")]
+    [Authorize(Roles = "Doctors, Admin")]
     public class DoctorsController : Controller
     {
         private HospitalContext db = new HospitalContext();
