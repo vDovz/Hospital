@@ -1,0 +1,99 @@
+﻿@model Hospital.Models.DoctorPatients
+@{
+    ViewBag.Title = "Details";
+}
+<h2>Details</h2>
+<div>
+    <h4>Doctor</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Doctor.Photo)
+        </dt>
+        <dd >
+            @Html.Raw("<img style='width:200px; height:200px;' src=\"data:image/jpeg;base64,"
+                                + Convert.ToBase64String(Model.Doctor.Photo) + "\" />")
+            <hr/>
+        </dd>
+        <dt>
+            @Html.DisplayName("Load photo")
+            Max size 64*64
+        </dt>
+        <dd>
+        @using (Html.BeginForm("Load", "Doctors", FormMethod.Post, new { enctype = "multipart/form-data" }))
+        {
+                @Html.Hidden("id", Model.Doctor.Id)
+                <input name="Photo" type="file" value="System.Byte[]">
+                <br>
+                <input type="submit" value="Upload" class = "btn btn-default">
+        }
+            <hr />
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Doctor.Name)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Doctor.Name)
+            <hr />
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Doctor.Specialization)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Doctor.Specialization)
+            <hr />
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Doctor.Patients)
+        </dt>
+        @foreach (var item in Model.Doctor.Patients)
+        {
+            <dd>
+                @Html.DisplayFor(model => item.Name)
+            </dd>
+                    <dd>
+                        @Html.DisplayFor(model => item.DayOfBirth)
+                    </dd>
+        }
+    </dl>
+</div>
+<div>
+    <hr />
+    <h4> Add patient</h4>
+    <table class="table">
+        <tr>
+            <th>
+                @Html.DisplayName("Name")
+            </th>
+            <th>
+                @Html.DisplayName("Date")
+            </th>
+            <th>
+                @Html.DisplayName("TaxCode")
+            </th>
+            <th></th>
+        </tr>
+        @foreach (var item in Model.Patients)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Name)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.DayOfBirth.Date)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.TaxCode)
+                </td>
+                <td>
+                    @Html.ActionLink("Add", "Add", new { patientid = item.Id, doctorid = Model.Doctor.Id })
+                </td>
+            </tr>
+        }
+    </table>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.Doctor.Id }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>
