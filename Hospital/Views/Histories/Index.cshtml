@@ -1,0 +1,33 @@
+﻿@model Hospital.Models.Patient
+
+@{
+    ViewBag.Title = "Patient History";
+}
+
+<h2>History @Html.DisplayNameFor(model => model.Name).</h2>
+
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.History.FirstOrDefault().Title)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.History.FirstOrDefault().Description)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model.History) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Title)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Description)
+        </td>
+    </tr>
+}
+</table>
+<p>
+    @Html.ActionLink("Add", "Create", new { id = Model.Id})
+</p>

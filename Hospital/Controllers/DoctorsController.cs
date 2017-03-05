@@ -51,10 +51,6 @@ namespace Hospital.Controllers
             {
                 return HttpNotFound();
             }
-            if (doctor.Photo == null)
-            {
-                doctor.Photo = new byte[100];
-            }
             return View(new DoctorPatients() { Doctor = doctor, Patients = db.Patients.Where((d) => !doctor.Patients.Contains(d)).ToList() });
         }
 
@@ -96,6 +92,7 @@ namespace Hospital.Controllers
         {
             if (ModelState.IsValid)
             {
+                doctor.Photo = new byte[100];
                 db.Doctors.Add(doctor);
                 db.SaveChanges();
                 return RedirectToAction("Index");

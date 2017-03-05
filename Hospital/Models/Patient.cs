@@ -20,5 +20,7 @@ namespace Hospital.Models
         public string TaxCode { get; set; }
 
         public virtual ICollection<Doctor> Doctors { get; set; }
+
+        public virtual ICollection<History> History { get; set; }
     }
 }

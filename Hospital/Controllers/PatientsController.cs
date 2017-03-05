@@ -95,11 +95,11 @@ namespace Hospital.Controllers
         {
             if (ModelState.IsValid)
             {
+                patient.Photo = new byte[100];
                 db.Patients.Add(patient);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-
             return View(patient);
         }
 

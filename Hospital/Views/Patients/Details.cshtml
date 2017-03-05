@@ -79,7 +79,19 @@
                 @Html.DisplayFor(modelItem => item.Specialization)
             </dd>
         }
+        <dd>
+             <hr />
+        </dd>
+        <dt>
+            @Html.DisplayName("Patient history")
+        </dt>
+        <dd>
+            @Html.ActionLink("History", "Index", "Histories", new { id = Model.Patient.Id }, new { }) 
+            <hr />
+        </dd>
     </dl>
+
+    @Html.ActionLink("History", "Index", "Histories", new { id = Model.Patient.Id }, new { }) 
 </div>
 
 <div>
